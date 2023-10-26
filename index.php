@@ -57,19 +57,25 @@
         }
       }
       section {
-        height: 200px;
         overflow-x: scroll;
         background-color: aqua;
-        border-radius: 10px;
         padding: 20px;
-        width: 60%;
+        width: 80%;
+      }
+      section:nth-child(3) { 
+        border-radius: 0 0 10px 10px;
+        height: 400px;
+      }
+      section:nth-child(2) { 
+        border-radius: 10px 10px 0 0;
+        height: 200px;
       }
     </style>
   </head>
   <body>
     <h1>Users</h1>
     <section><?php
-      require("connection.php");
+      require_once("includes/connection.php"); 
       
       $query = "SELECT * FROM Users";
       $result = mysqli_query($connection, $query);
@@ -81,7 +87,7 @@
       <th>LastName</th>
       <th>Email</th>
       <th>Rank</th>
-      <th>Description</th>
+      <th>Password</th>
       </tr>";
 
    // $result = mysqli_query($connection, "SELECT * FROM Users WHERE email='adam.sochorec@icloud.com'"); // DISPLAY RESULT IN QUERY where we get results with mail
@@ -97,24 +103,21 @@
        echo "<td>" . $row['lname'] . "</td>";
        echo "<td>" . $row['email'] . "</td>"; 
        echo "<td>" . $row['rank'] . "</td>";
-       echo "<td>" . $row['description'] . "</td>";
+       echo "<td>" . $row['password'] . "</td>";
        echo "<td><a href='delete.php?lname=" . $row['lname']."'>DELETE</a></td>";
-      echo "<td><a href='editui.php?lname=" . $row['lname']."'>EDIT</a></td>";
-      echo "</tr>";
+       echo "<td><a href='editui.php?lname=" . $row['lname']."'>EDIT</a></td>";
+       echo "</tr>";
       }
     echo "</table>";
       mysqli_close($connection);
       ?></section>
-  </body>
-</html>
-<br /><br />
-<form action="insert.php" method="post">
+      <section><h1>Sign up</h1><form action="insert.php" method="post">
   Username: <input type="text" name="username" /><br /><br />
   First name: <input type="text" name="fname" /><br /><br />
   Last name: <input type="text" name="lname" /><br /><br />
   Email: <input type="text" name="email" /><br /><br />
   Rank: <input type="number" name="rank" /><br /><br />
-  Description: <input type="text" name="description" /><br /><br />
-  <input type="submit" name="submit" />
-</form>
-<br /><br />
+  Password: <input type="password" name="password" /><br /><br />
+  <input type="submit" name="submit" /></section>
+  </body>
+</html>

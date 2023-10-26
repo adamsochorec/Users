@@ -1,5 +1,5 @@
 <?php 
-require("connection.php");
+require_once("includes/connection.php"); 
 
 $id=$_POST['lname'];
 $newDescription = $_POST['desc'];
